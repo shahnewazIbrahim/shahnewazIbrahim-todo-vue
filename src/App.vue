@@ -1,11 +1,13 @@
 <template>
-  <div id="app" class="flex ">
-    <Header />
+  <div id="app" class="container_customize">
+    <div style="width: 90%">
+      <Header /> 
 
-    <AddTodo @add-todo="addTodo" />
-    <p id="message"></p>
+      <AddTodo @add-todo="addTodo" />
+      <p id="message"></p>
 
-    <Todos v-bind:todos="todos" @del-todo="deleteTodo" /> 
+      <Todos v-bind:todos="todos" @del-todo="deleteTodo" /> 
+    </div>
   </div>
 </template>
 
@@ -32,6 +34,7 @@ export default {
       if(confirm("Do you really want to delete?")){
         axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
         this.todos = this.todos.filter(todo => todo.id !== id);
+        this.sessionMessage("Deleted Successfully");
       }
     },
     addTodo(newTodo) {
@@ -51,16 +54,19 @@ export default {
         .catch(error=> console.log(error))
 
       }else {
-        document.getElementById('message').style.display = "";
-        document.getElementById('message').innerHTML = "Please fill the text field";
-
-        setInterval(function(){
-          document.getElementById('message').style.display = "none";
-          document.getElementById('message').innerHTML = "";
-        }, 2000)
-
+        this.sessionMessage("Please fill the text field");
       }
     },
+    sessionMessage(text)
+    {
+        document.getElementById('message').style.display = "";
+        document.getElementById('message').innerHTML = text;
+
+        setTimeout(function(){
+          document.getElementById('message').style.display = "none";
+          document.getElementById('message').innerHTML = "";
+        }, 2500)
+    }
   },
   created() {
       axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
@@ -81,6 +87,12 @@ export default {
    font-family: Arial, Helvetica, sans-serif;
    line-height: 1.4;
  }
+
+.container_customize {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
  #message {
    background: tomato;

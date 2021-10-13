@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit="addTodo">
+        <form @submit="addTodo" style="margin: 8px">
             <input type="text" v-model="title" name="title" placeholder="Add Todo..">
             <input type="submit" value="Submit" class="btn">
         </form>
@@ -43,5 +43,14 @@ export default {
     }
     input[type="submit"] {
         flex: 2;
+    }
+    .btn {
+        background: rgb(46, 46, 70);
+        color: #fff;
+        border: none;
+        padding: 5px 9px;
+        border-radius: 2px;
+        cursor: pointer;
+        float: right;
     }
 </style>
