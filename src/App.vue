@@ -29,8 +29,10 @@ export default {
   },
   methods: {
     deleteTodo(id) {
-      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
-      this.todos = this.todos.filter(todo => todo.id !== id);
+      if(confirm("Do you really want to delete?")){
+        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+        this.todos = this.todos.filter(todo => todo.id !== id);
+      }
     },
     addTodo(newTodo) {
       const {title, completed} = newTodo;
@@ -58,7 +60,6 @@ export default {
         }, 2000)
 
       }
-      
     },
   },
   created() {
