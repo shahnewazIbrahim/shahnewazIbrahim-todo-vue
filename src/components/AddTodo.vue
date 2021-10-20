@@ -4,6 +4,8 @@
             <input type="text" v-model="title" name="title" placeholder="Add Todo..">
             <input type="submit" value="Submit" class="btn">
         </form>
+        
+        <!-- title that inputted in above -->
         <p>{{ title }}</p>
     </div>
 </template>
